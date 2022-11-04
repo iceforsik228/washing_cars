@@ -1,1 +1,1 @@
-"# washing_cars" 
+# washing_cars
