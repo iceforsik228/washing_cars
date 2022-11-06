@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
 const washingSchema = require('./models/washing');
@@ -14,39 +13,19 @@ app.listen(process.env.PORT, (error) => {
 
 const Washing = mongoose.model('Washing', washingSchema);
 
-app.use(cors());
-
 app.get('/', (req, res) => {
-  const washing = [
-    {
-      id: 1,
-      name: 'washing 1',
-      price: 80,
-      talons: [
-        {
-          time: '13:40',
-        },
-        {
-          time: '14:40',
-        },
-        {
-          time: '15:40',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'washing 2',
-      price: 300,
-      talons: [
-        {
-          time: '10:14',
-        },
-        {
-          time: '12:30',
-        },
-      ],
-    },
-  ];
-  res.json(washing);
+  Washing.find().then((washing) => res.status(200).json(washing));
+});
+
+app.get('/add-washing', (req, res) => {
+  const washing = new Washing({
+    name: 'washing',
+    description: 'qweqwe',
+    distance: 123,
+    talons: [1, 2, 3],
+  });
+  washing.save((error, data) => {
+    if (error) console.log(error);
+  });
+  res.json({ message: 'success' });
 });
