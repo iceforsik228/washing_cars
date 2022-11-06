@@ -14,6 +14,7 @@ app.listen(process.env.PORT, (error) => {
 const Washing = mongoose.model('Washing', washingSchema);
 
 app.get('/', (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' });
   Washing.find().then((washing) => res.status(200).json(washing));
 });
 
