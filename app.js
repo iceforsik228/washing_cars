@@ -3,8 +3,8 @@ require('dotenv').config();
 
 const app = express();
 
-app.listen(process.env.PORT, () => {
-  console.log('Server listening on port ' + process.env.PORT);
+app.listen(process.env.PORT, (error) => {
+  error ? console.log(errorMsg(error)) : console.log(`listening port ${process.env.PORT}`);
 });
 
 app.get('/', (req, res) => {
