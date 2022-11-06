@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
 const washingSchema = require('./models/washing');
@@ -12,6 +13,8 @@ app.listen(process.env.PORT, (error) => {
 });
 
 const Washing = mongoose.model('Washing', washingSchema);
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   const washing = [
