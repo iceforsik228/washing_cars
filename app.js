@@ -1,11 +1,17 @@
 const express = require('express');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
+const washingSchema = require('./models/washing');
+
+mongoose.connect(process.env.MONGO_URI);
 const app = express();
 
 app.listen(process.env.PORT, (error) => {
   error ? console.log(errorMsg(error)) : console.log(`listening port ${process.env.PORT}`);
 });
+
+const Washing = mongoose.model('Washing', washingSchema);
 
 app.get('/', (req, res) => {
   const washing = [
