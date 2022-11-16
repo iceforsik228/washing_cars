@@ -34,7 +34,7 @@ app.get('/api/washing', (req, res) => {
 app.get('/api/washing/:idWashing/:idTime', (req, res) => {
   Washing.findById(req.params.idWashing, (err, washing) => {
     if (err) return res.status(500).send(err);
-    res.status(200).json(washing[idTime]);
+    res.status(200).json(washing['talons'][req.params.idTime]);
   });
 });
 
