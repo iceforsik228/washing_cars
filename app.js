@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors');
 require('dotenv').config();
 
 const washingSchema = require('./models/washing');
@@ -8,10 +9,9 @@ const washingSchema = require('./models/washing');
 const app = express();
 
 app.use(morgan('dev'));
-
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -25,13 +25,27 @@ app.listen(process.env.PORT, (error) => {
 const Washing = mongoose.model('Washing', washingSchema);
 
 app.get('/api/washing', (req, res) => {
-  res.header({ 'Access-Control-Allow-Origin': '*' });
-  Washing.find().then((washing) => res.status(200).json(washing));
+  Washing.find((err, washings) => {
+    if (err) return res.status(500).send(err);
+    res.status(200).json(washings);
+  });
+});
+
+app.get('/api/washing/:idWashing/:idTime', (req, res) => {
+  Washing.findById(req.params.idWashing, (err, washing) => {
+    if (err) return res.status(500).send(err);
+    res.status(200).json(washing[idTime]);
+  });
 });
 
 app.get('/api/washing/:id', (req, res) => {
-  res.header({ 'Access-Control-Allow-Origin': '*' });
-  Washing.findById(req.params.id).then((washing) => res.status(200).json(washing));
+  Washing.findById(req.params.id)
+    .then((washing) => {
+      res.status(200).json(washing);
+    })
+    .catch((err) => {
+      res.status(500).send(err.message);
+    });
 });
 
 app.post('/api/add-washing', (req, res) => {

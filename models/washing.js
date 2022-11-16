@@ -16,7 +16,12 @@ const washingSchema = new Schema(
       type: Number,
       required: true,
     },
-    talons: Array,
+    talons: [
+      {
+        time: String,
+        BoxesCount: Number,
+      },
+    ],
   },
   { timestamps: true },
 );
