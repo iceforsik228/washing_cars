@@ -19,7 +19,7 @@ const washingSchema = new Schema(
     talons: [
       {
         time: String,
-        BoxesCount: Number,
+        boxesCount: Number,
       },
     ],
   },
