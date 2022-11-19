@@ -24,4 +24,4 @@ const orderSchema = new Schema(
   { timestamps: true },
 );
 
-module.exports = washingSchema;
+module.exports = orderSchema;

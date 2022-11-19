@@ -18,6 +18,7 @@ router.post('/api/order', (req, res) => {
   const { surname, name, phone, paymentMethod } = req.body;
   const order = new Order({ surname, name, phone, paymentMethod });
   order.save((err) => res.status(404).json({ message: 'krivoy frontend' }));
+  res.json({ message: 'success' });
 });
 
 module.exports = router;
