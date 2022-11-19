@@ -18,8 +18,8 @@ router.post('/api/order', (req, res) => {
   const { surname, name, phone, paymentMethod } = req.body;
   const order = new Order({ surname, name, phone, paymentMethod });
   order.save((err) => {
-	if (err) return res.status(404).json({"message": "krivoy frontend"})
-	res.status(200).json({ message: 'ya bog' }
+    if (err) return res.status(404).json({ message: 'krivoy frontend' });
+    res.status(200).json({ message: 'ya bog' });
   });
 });
 
