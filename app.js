@@ -5,6 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const washingRoutes = require('./routes/api-washing-routes');
+const orderRoutes = require('./routes/api-order-routes');
 const app = express();
 
 app.use(morgan('dev'));
@@ -23,3 +24,4 @@ app.listen(process.env.PORT, (err) => {
 });
 
 app.use(washingRoutes);
+app.use(orderRoutes);
